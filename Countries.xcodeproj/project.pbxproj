@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 426751A72EDE3ADF0056D85B /* DesignSystem */; };
 		42A0915F2EDE130900AB4F79 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0915E2EDE130900AB4F79 /* Core */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42A0915F2EDE130900AB4F79 /* Core in Frameworks */,
+				426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +120,7 @@
 			name = Countries;
 			packageProductDependencies = (
 				42A0915E2EDE130900AB4F79 /* Core */,
+				426751A72EDE3ADF0056D85B /* DesignSystem */,
 			);
 			productName = Countries;
 			productReference = 429E4AC42EDE0B39005DDFA2 /* Countries.app */;
@@ -203,6 +206,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */,
+				426751A62EDE3ADF0056D85B /* XCLocalSwiftPackageReference "Packages/DesignSystem" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 429E4AC52EDE0B39005DDFA2 /* Products */;
@@ -589,6 +593,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		426751A62EDE3ADF0056D85B /* XCLocalSwiftPackageReference "Packages/DesignSystem" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/DesignSystem;
+		};
 		42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Core;
@@ -596,6 +604,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		426751A72EDE3ADF0056D85B /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
 		42A0915E2EDE130900AB4F79 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
