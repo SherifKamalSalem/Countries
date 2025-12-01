@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		42A0915F2EDE130900AB4F79 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0915E2EDE130900AB4F79 /* Core */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		429E4AD72EDE0B3B005DDFA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A0915F2EDE130900AB4F79 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Countries;
 			packageProductDependencies = (
+				42A0915E2EDE130900AB4F79 /* Core */,
 			);
 			productName = Countries;
 			productReference = 429E4AC42EDE0B39005DDFA2 /* Countries.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 429E4ABB2EDE0B39005DDFA2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 429E4AC52EDE0B39005DDFA2 /* Products */;
 			projectDirPath = "";
@@ -578,6 +587,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Core;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42A0915E2EDE130900AB4F79 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 429E4ABC2EDE0B39005DDFA2 /* Project object */;
 }
