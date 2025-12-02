@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4234CCE72EDE94D200BB4C89 /* Location in Frameworks */ = {isa = PBXBuildFile; productRef = 4234CCE62EDE94D200BB4C89 /* Location */; };
+		4234CD142EDEA62900BB4C89 /* CountriesListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 4234CD132EDEA62900BB4C89 /* CountriesListFeature */; };
 		426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 426751A72EDE3ADF0056D85B /* DesignSystem */; };
 		426751B82EDE444D0056D85B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 426751B72EDE444D0056D85B /* Networking */; };
 		426751BB2EDE447F0056D85B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 426751BA2EDE447F0056D85B /* Networking */; };
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4234CD142EDEA62900BB4C89 /* CountriesListFeature in Frameworks */,
 				426751B82EDE444D0056D85B /* Networking in Frameworks */,
 				42A0915F2EDE130900AB4F79 /* Core in Frameworks */,
 				4234CCE72EDE94D200BB4C89 /* Location in Frameworks */,
@@ -136,6 +138,7 @@
 				426752222EDE51A60056D85B /* Storage */,
 				426752242EDE56570056D85B /* Core */,
 				4234CCE62EDE94D200BB4C89 /* Location */,
+				4234CD132EDEA62900BB4C89 /* CountriesListFeature */,
 			);
 			productName = Countries;
 			productReference = 429E4AC42EDE0B39005DDFA2 /* Countries.app */;
@@ -225,6 +228,7 @@
 				426751B92EDE447F0056D85B /* XCLocalSwiftPackageReference "Packages/Networking" */,
 				426752212EDE51A60056D85B /* XCLocalSwiftPackageReference "Packages/Storage" */,
 				4234CCE52EDE94D200BB4C89 /* XCLocalSwiftPackageReference "Packages/Location" */,
+				4234CD122EDEA62900BB4C89 /* XCLocalSwiftPackageReference "Packages/CountriesListFeature" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 429E4AC52EDE0B39005DDFA2 /* Products */;
@@ -431,6 +435,7 @@
 				DEVELOPMENT_TEAM = SGJ7MUL4GN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to automatically add your current country to your list";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,6 +468,7 @@
 				DEVELOPMENT_TEAM = SGJ7MUL4GN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to automatically add your current country to your list";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -615,6 +621,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Location;
 		};
+		4234CD122EDEA62900BB4C89 /* XCLocalSwiftPackageReference "Packages/CountriesListFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CountriesListFeature;
+		};
 		426751A62EDE3ADF0056D85B /* XCLocalSwiftPackageReference "Packages/DesignSystem" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/DesignSystem;
@@ -637,6 +647,10 @@
 		4234CCE62EDE94D200BB4C89 /* Location */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Location;
+		};
+		4234CD132EDEA62900BB4C89 /* CountriesListFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CountriesListFeature;
 		};
 		426751A72EDE3ADF0056D85B /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

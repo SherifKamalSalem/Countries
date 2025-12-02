@@ -11,6 +11,7 @@ import Foundation
 public enum CountriesEndpoint: Endpoint, Sendable {
     case getAllCountries
     case searchByName(String)
+    case searchByCode(String)
     
     public var path: String {
         switch self {
@@ -19,6 +20,9 @@ public enum CountriesEndpoint: Endpoint, Sendable {
         case .searchByName(let name):
             let encoded = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? name
             return "/v2/name/\(encoded)"
+        case .searchByCode(let code):
+            return "/v2/alpha/\(code)"
+            
         }
     }
     
@@ -29,9 +33,8 @@ public enum CountriesEndpoint: Endpoint, Sendable {
     public var queryParameters: [String: String] {
         switch self {
         case .getAllCountries:
-            // Only fetch fields we need for the list
             return ["fields": "name,capital,currencies,flags"]
-        case .searchByName:
+        case .searchByName, .searchByCode:
             return [:]
         }
     }
