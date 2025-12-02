@@ -1,48 +1,36 @@
-//
-//  CountriesViewModel.swift
-//  CountriesListFeature
-//
-//  Created by Sherif Kamal on 02/12/2025.
-//
-
-
 import Foundation
-import Combine
 import Core
-import Storage
-import Location
 
-/// ViewModel for the main countries list screen
-@MainActor
 @Observable
+@MainActor
 public final class CountriesViewModel {
     
-    // MARK: - Published State
     public private(set) var savedCountries: [Country] = []
     public private(set) var isLoading = false
     public private(set) var error: Error?
     public var showError = false
     
-    // MARK: - Dependencies
-    private let repository: CountriesRepositoryProtocol
-    private let storageService: StorageServiceProtocol
-    private let locationService: LocationServiceProtocol
+    private let loadSavedCountriesUseCase: LoadSavedCountriesUseCase
+    private let addCountryUseCase: AddCountryUseCase
+    private let removeCountryUseCase: RemoveCountryUseCase
+    private let getCurrentLocationCountryUseCase: GetCurrentLocationCountryUseCase
     
-    private var cancellables = Set<AnyCancellable>()
-    
-    // MARK: - Init
     public init(
-        repository: CountriesRepositoryProtocol,
-        storageService: StorageServiceProtocol,
-        locationService: LocationServiceProtocol
+        loadSavedCountriesUseCase: LoadSavedCountriesUseCase,
+        addCountryUseCase: AddCountryUseCase,
+        removeCountryUseCase: RemoveCountryUseCase,
+        getCurrentLocationCountryUseCase: GetCurrentLocationCountryUseCase
     ) {
-        self.repository = repository
-        self.storageService = storageService
-        self.locationService = locationService
+        self.loadSavedCountriesUseCase = loadSavedCountriesUseCase
+        self.addCountryUseCase = addCountryUseCase
+        self.removeCountryUseCase = removeCountryUseCase
+        self.getCurrentLocationCountryUseCase = getCurrentLocationCountryUseCase
     }
     
+    // MARK: - Public Methods
+    
     public func loadSavedCountries() async {
-        savedCountries = await storageService.loadCountries()
+        savedCountries = await loadSavedCountriesUseCase.execute()
         
         if savedCountries.isEmpty {
             await addCurrentLocationCountry()
@@ -50,22 +38,23 @@ public final class CountriesViewModel {
     }
     
     public func addCountry(_ country: Country) async -> Bool {
-        guard savedCountries.count < 5 else {
+        let result = await addCountryUseCase.execute(country: country)
+        
+        switch result {
+        case .added, .alreadyExists:
+            savedCountries = await loadSavedCountriesUseCase.execute()
+            return true
+            
+        case .limitReached:
             error = CountriesError.limitReached
             showError = true
             return false
         }
-        
-        let added = await storageService.addCountry(country)
-        if added {
-            savedCountries = await storageService.loadCountries()
-        }
-        return added
     }
     
     public func removeCountry(_ country: Country) async {
-        await storageService.removeCountry(id: country.id)
-        savedCountries = await storageService.loadCountries()
+        await removeCountryUseCase.execute(countryId: country.id)
+        savedCountries = await loadSavedCountriesUseCase.execute()
     }
     
     public func removeCountry(at offsets: IndexSet) {
@@ -79,30 +68,16 @@ public final class CountriesViewModel {
     }
     
     private func addCurrentLocationCountry() async {
-        do {
-            let countryCode = try await locationService.getCurrentCountryCode()
+        let result = await getCurrentLocationCountryUseCase.execute()
+        
+        switch result {
+        case .success(let country):
+            _ = await addCountryUseCase.execute(country: country)
+            savedCountries = await loadSavedCountriesUseCase.execute()
             
-            let countries = try await repository.searchCountries(by: countryCode)
-            
-            if let country = countries.first {
-                _ = await storageService.addCountry(country)
-                savedCountries = await storageService.loadCountries()
-            }
-        } catch {
-            await addDefaultCountry()
-        }
-    }
-    
-    private func addDefaultCountry() async {
-        do {
-            let countries = try await repository.searchCountries(by: "Egypt")
-            if let egypt = countries.first {
-                _ = await storageService.addCountry(egypt)
-                savedCountries = await storageService.loadCountries()
-            }
-        } catch {
+        case .locationDenied, .countryNotFound, .error:
             #if DEBUG
-            debugPrint("Failed to add default country: \(error)")
+            debugPrint("Failed to add current location country: \(result)")
             #endif
         }
     }
@@ -112,4 +87,3 @@ public final class CountriesViewModel {
         error = nil
     }
 }
-
