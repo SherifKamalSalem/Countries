@@ -62,16 +62,7 @@ public struct SearchView: View {
     }
     
     private var loadingView: some View {
-        VStack {
-            Spacer()
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: AppColors.primary))
-            Text("Searching...")
-                .font(AppTypography.subheadline)
-                .foregroundStyle(AppColors.textSecondary)
-                .padding(.top, AppSpacing.sm)
-            Spacer()
-        }
+        SkeletonCountriesListView(itemCount: 3)
     }
     
     private func errorView(_ error: Error) -> some View {
