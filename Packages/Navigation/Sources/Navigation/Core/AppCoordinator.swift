@@ -9,10 +9,13 @@ import Core
 import SwiftUI
 
 @MainActor
-public final class AppCoordinator: ObservableObject {
+public final class AppCoordinator: ObservableObject, Router {
     
     @Published public var path = NavigationPath()
-    @Published public var showSearch = false
+    
+    @Published public var presentedSheet: Sheet?
+    
+    @Published public var fullScreenCover: Sheet?
     
     public init() {}
     
@@ -20,10 +23,8 @@ public final class AppCoordinator: ObservableObject {
         switch route {
         case .countriesList:
             popToRoot()
-        case .countryDetail(let country):
+        case .countryDetail:
             path.append(route)
-        case .search:
-            showSearch = true
         }
     }
     
@@ -36,8 +37,27 @@ public final class AppCoordinator: ObservableObject {
         path = NavigationPath()
     }
     
-    public func dismissSearch() {
-        showSearch = false
+    public func present(sheet: Sheet) {
+        presentedSheet = sheet
+    }
+    
+    public func dismiss() {
+        if presentedSheet != nil {
+            presentedSheet = nil
+        } else if fullScreenCover != nil {
+            fullScreenCover = nil
+        }
+    }
+    
+    public func presentFullScreen(_ sheet: Sheet) {
+        fullScreenCover = sheet
+    }
+    public func isPresenting(_ sheet: Sheet) -> Bool {
+        presentedSheet == sheet || fullScreenCover == sheet
+    }
+    
+    public func asRouter() -> AnyRouter {
+        AnyRouter(self)
     }
 }
 
