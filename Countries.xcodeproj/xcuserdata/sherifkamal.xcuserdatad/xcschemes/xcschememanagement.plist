@@ -7,7 +7,25 @@
 		<key>Countries.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>429E4AC32EDE0B39005DDFA2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>429E4AD52EDE0B3B005DDFA2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>429E4ADF2EDE0B3B005DDFA2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
