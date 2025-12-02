@@ -41,8 +41,6 @@ public struct GetCurrentLocationCountryUseCase: Sendable {
             
             return .success(country)
             
-            return await fetchDefaultCountry()
-            
         } catch {
             return await fetchDefaultCountry()
         }
