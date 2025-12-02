@@ -2,7 +2,7 @@
 
 A SwiftUI app for saving and exploring country information. Search for countries, see their capital and currency, and keep up to 5 favorites.
 
-![App Demo](demo.gif)
+![App Demo](https://github.com/user-attachments/assets/030649df-e2cb-474c-b68e-b257f255bd14)
 
 ## How to Run
 
