@@ -5,11 +5,15 @@
 //  Created by Sherif Kamal on 02/12/2025.
 //
 
-
 import Foundation
 import Core
 import Networking
 import Combine
+
+public protocol SearchViewModelDelegate: AnyObject, Sendable {
+    @MainActor func searchViewModel(_ viewModel: SearchViewModel, didSelectCountry country: Country)
+    @MainActor func searchViewModelDidRequestDismiss(_ viewModel: SearchViewModel)
+}
 
 @MainActor
 public final class SearchViewModel: ObservableObject {
@@ -23,7 +27,9 @@ public final class SearchViewModel: ObservableObject {
     private let searchCountriesUseCase: SearchCountriesUseCase
     private var cancellables = Set<AnyCancellable>()
     private var searchTask: Task<Void, Never>?
-   
+    
+    public weak var delegate: SearchViewModelDelegate?
+    
     public init(searchCountriesUseCase: SearchCountriesUseCase) {
         self.searchCountriesUseCase = searchCountriesUseCase
         setupSearchDebounce()
@@ -55,7 +61,6 @@ public final class SearchViewModel: ObservableObject {
         }
     }
     
-    
     private func search(query: String) async {
         isSearching = true
         hasSearched = true
@@ -79,6 +84,14 @@ public final class SearchViewModel: ObservableObject {
         }
         
         isSearching = false
+    }
+    
+    public func selectCountry(_ country: Country) {
+        delegate?.searchViewModel(self, didSelectCountry: country)
+    }
+    
+    public func requestDismiss() {
+        delegate?.searchViewModelDidRequestDismiss(self)
     }
     
     public func clear() {

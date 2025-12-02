@@ -5,25 +5,19 @@
 //  Created by Sherif Kamal on 02/12/2025.
 //
 
-
 import SwiftUI
 import Core
 import DesignSystem
 
-struct SearchView: View {
+public struct SearchView: View {
     
-    @State private var viewModel: SearchViewModel
-    @State private var debounceTask: Task<Void, Never>?
-    @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var viewModel: SearchViewModel
     
-    let onCountrySelected: (Country) -> Void
-    
-    init(searchCountriesUseCase: SearchCountriesUseCase, onCountrySelected: @escaping (Country) -> Void) {
-        _viewModel = State(initialValue: SearchViewModel(searchCountriesUseCase: searchCountriesUseCase))
-        self.onCountrySelected = onCountrySelected
+    public init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ZStack {
                 AppColors.background
@@ -37,17 +31,7 @@ struct SearchView: View {
                     .padding(.horizontal, AppSpacing.md)
                     .padding(.top, AppSpacing.sm)
                     
-                    if viewModel.isSearching {
-                        loadingView
-                    } else if let error = viewModel.error {
-                        errorView(error)
-                    } else if viewModel.searchResults.isEmpty && viewModel.hasSearched {
-                        noResultsView
-                    } else if viewModel.searchResults.isEmpty {
-                        promptView
-                    } else {
-                        resultsList
-                    }
+                    contentView
                 }
             }
             .navigationTitle("Add Country")
@@ -55,10 +39,25 @@ struct SearchView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
-                        dismiss()
+                        viewModel.requestDismiss()
                     }
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private var contentView: some View {
+        if viewModel.isSearching {
+            loadingView
+        } else if let error = viewModel.error {
+            errorView(error)
+        } else if viewModel.searchResults.isEmpty && viewModel.hasSearched {
+            noResultsView
+        } else if viewModel.searchResults.isEmpty {
+            promptView
+        } else {
+            resultsList
         }
     }
     
@@ -122,7 +121,7 @@ struct SearchView: View {
                         currencyCode: country.currencies.first?.code,
                         flagURL: country.flagURL,
                         onTap: {
-                            onCountrySelected(country)
+                            viewModel.selectCountry(country)
                         }
                     )
                 }
