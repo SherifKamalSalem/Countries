@@ -1,18 +1,18 @@
 //
 //  CountriesError.swift
-//  CountriesListFeature
-//
-//  Created by Sherif Kamal on 02/12/2025.
+//  Core
 //
 
+import Foundation
 
-enum CountriesError: LocalizedError {
+public enum CountriesError: LocalizedError, Sendable {
     case limitReached
     
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
         case .limitReached:
             return "You can only save up to 5 countries."
         }
     }
 }
+

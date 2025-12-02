@@ -15,6 +15,7 @@
 		426752232EDE51A60056D85B /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 426752222EDE51A60056D85B /* Storage */; };
 		426752252EDE56570056D85B /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 426752242EDE56570056D85B /* Core */; };
 		42A0915F2EDE130900AB4F79 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0915E2EDE130900AB4F79 /* Core */; };
+		42B24BE32EDEF45E0058616C /* CountryDetailsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 42B24BE22EDEF45E0058616C /* CountryDetailsFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 				426752232EDE51A60056D85B /* Storage in Frameworks */,
 				426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */,
 				426752252EDE56570056D85B /* Core in Frameworks */,
+				42B24BE32EDEF45E0058616C /* CountryDetailsFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +141,7 @@
 				426752242EDE56570056D85B /* Core */,
 				4234CCE62EDE94D200BB4C89 /* Location */,
 				4234CD132EDEA62900BB4C89 /* CountriesListFeature */,
+				42B24BE22EDEF45E0058616C /* CountryDetailsFeature */,
 			);
 			productName = Countries;
 			productReference = 429E4AC42EDE0B39005DDFA2 /* Countries.app */;
@@ -229,6 +232,7 @@
 				426752212EDE51A60056D85B /* XCLocalSwiftPackageReference "Packages/Storage" */,
 				4234CCE52EDE94D200BB4C89 /* XCLocalSwiftPackageReference "Packages/Location" */,
 				4234CD122EDEA62900BB4C89 /* XCLocalSwiftPackageReference "Packages/CountriesListFeature" */,
+				42B24BE12EDEF45E0058616C /* XCLocalSwiftPackageReference "Packages/CountryDetailsFeature" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 429E4AC52EDE0B39005DDFA2 /* Products */;
@@ -641,6 +645,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Core;
 		};
+		42B24BE12EDEF45E0058616C /* XCLocalSwiftPackageReference "Packages/CountryDetailsFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/CountryDetailsFeature;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -675,6 +683,10 @@
 		42A0915E2EDE130900AB4F79 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Core;
+		};
+		42B24BE22EDEF45E0058616C /* CountryDetailsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CountryDetailsFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
