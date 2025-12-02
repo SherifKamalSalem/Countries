@@ -37,11 +37,9 @@ public struct GetCurrentLocationCountryUseCase: Sendable {
         do {
             let countryCode = try await locationService.getCurrentCountryCode()
             
-            let countries = try await repository.searchCountries(by: countryCode)
+            let country = try await repository.getCountryDetails(by: countryCode)
             
-            if let country = countries.first {
-                return .success(country)
-            }
+            return .success(country)
             
             return await fetchDefaultCountry()
             

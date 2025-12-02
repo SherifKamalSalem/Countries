@@ -51,6 +51,14 @@ public final class CountriesRepository: CountriesRepositoryProtocol, @unchecked 
         return dtos.map(CountryMapper.mapDetail)
     }
     
+    public func getCountryDetails(by code: String) async throws -> Country {
+        let dto: CountryDetailDTO = try await networkService.request(
+            CountriesEndpoint.searchByCode(code)
+        )
+        
+        return CountryMapper.mapDetail(dto)
+    }
+    
     public func getCountryDetails(name: String) async throws -> CountryDetail {
         let dtos: [CountryDetailDTO] = try await networkService.request(
             CountriesEndpoint.searchByName(name)

@@ -42,6 +42,11 @@ public final class MockCountriesRepository: CountriesRepositoryProtocol, @unchec
         }
     }
     
+    public func getCountryDetails(by code: String) async throws -> Country {
+        if shouldFail { throw NetworkError.offline }
+        return .mock(id: code, name: "Country \(code)", capital: "Capital \(code)")
+    }
+    
     public func getCountryDetails(name: String) async throws -> CountryDetail {
         if shouldFail { throw NetworkError.offline }
         return .mock()
