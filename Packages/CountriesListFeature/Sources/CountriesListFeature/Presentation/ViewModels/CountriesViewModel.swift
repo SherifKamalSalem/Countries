@@ -1,5 +1,17 @@
+//
+//  CountriesViewModel.swift
+//  CountriesListFeature
+//
+//  Created by Sherif Kamal on 02/12/2025.
+//
+
 import Foundation
 import Core
+
+public protocol CountriesViewModelDelegate: AnyObject, Sendable {
+    @MainActor func countriesViewModelDidRequestSearch(_ viewModel: CountriesViewModel)
+    @MainActor func countriesViewModel(_ viewModel: CountriesViewModel, didSelectCountry country: Country)
+}
 
 @Observable
 @MainActor
@@ -10,10 +22,22 @@ public final class CountriesViewModel {
     public private(set) var error: Error?
     public var showError = false
     
+    public var canAddMoreCountries: Bool {
+        savedCountries.count < maxCountries
+    }
+    
+    public var countryCount: Int {
+        savedCountries.count
+    }
+    
+    private let maxCountries = 5
+    
     private let loadSavedCountriesUseCase: LoadSavedCountriesUseCase
     private let addCountryUseCase: AddCountryUseCase
     private let removeCountryUseCase: RemoveCountryUseCase
     private let getCurrentLocationCountryUseCase: GetCurrentLocationCountryUseCase
+    
+    public weak var delegate: CountriesViewModelDelegate?
     
     public init(
         loadSavedCountriesUseCase: LoadSavedCountriesUseCase,
@@ -27,13 +51,15 @@ public final class CountriesViewModel {
         self.getCurrentLocationCountryUseCase = getCurrentLocationCountryUseCase
     }
     
-    // MARK: - Public Methods
-    
     public func loadSavedCountries() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         savedCountries = await loadSavedCountriesUseCase.execute()
         
         if savedCountries.isEmpty {
             await addCurrentLocationCountry()
+            savedCountries = await loadSavedCountriesUseCase.execute()
         }
     }
     
@@ -67,23 +93,30 @@ public final class CountriesViewModel {
         }
     }
     
+    public func requestSearch() {
+        delegate?.countriesViewModelDidRequestSearch(self)
+    }
+    
+    public func selectCountry(_ country: Country) {
+        delegate?.countriesViewModel(self, didSelectCountry: country)
+    }
+    
+    public func dismissError() {
+        showError = false
+        error = nil
+    }
+    
     private func addCurrentLocationCountry() async {
         let result = await getCurrentLocationCountryUseCase.execute()
         
         switch result {
         case .success(let country):
             _ = await addCountryUseCase.execute(country: country)
-            savedCountries = await loadSavedCountriesUseCase.execute()
             
         case .locationDenied, .countryNotFound, .error:
             #if DEBUG
             debugPrint("Failed to add current location country: \(result)")
             #endif
         }
-    }
-    
-    public func dismissError() {
-        showError = false
-        error = nil
     }
 }
