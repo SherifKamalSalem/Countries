@@ -12,18 +12,16 @@ struct AppRootView: View {
     
     @StateObject private var appCoordinator = AppCoordinator()
     @StateObject private var countriesListCoordinator: CountriesListCoordinator
-    @StateObject private var countryDetailCoordinator: CountryDetailCoordinator
     
     init() {
         let coordinator = AppCoordinator()
         _appCoordinator = StateObject(wrappedValue: coordinator)
         _countriesListCoordinator = StateObject(wrappedValue: CountriesListCoordinator(router: coordinator))
-        _countryDetailCoordinator = StateObject(wrappedValue: CountryDetailCoordinator())
     }
     
     var body: some View {
         NavigationStack(path: $appCoordinator.path) {
-            CountriesListRootView(coordinator: countriesListCoordinator)
+            CountriesListRootView(appCoordinator: appCoordinator)
                 .navigationDestination(for: AppRoute.self) { route in
                     destinationView(for: route)
                 }
@@ -45,7 +43,7 @@ struct AppRootView: View {
             
         case .countryDetail(let country):
             CountryDetailView(
-                viewModel: countryDetailCoordinator.makeCountryDetailViewModel(for: country)
+                viewModel: CountryDetailViewModel(country: country)
             )
         }
     }
