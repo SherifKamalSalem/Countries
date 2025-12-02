@@ -10,6 +10,8 @@
 		426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 426751A72EDE3ADF0056D85B /* DesignSystem */; };
 		426751B82EDE444D0056D85B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 426751B72EDE444D0056D85B /* Networking */; };
 		426751BB2EDE447F0056D85B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = 426751BA2EDE447F0056D85B /* Networking */; };
+		426752232EDE51A60056D85B /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 426752222EDE51A60056D85B /* Storage */; };
+		426752252EDE56570056D85B /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 426752242EDE56570056D85B /* Core */; };
 		42A0915F2EDE130900AB4F79 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0915E2EDE130900AB4F79 /* Core */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +64,9 @@
 				426751B82EDE444D0056D85B /* Networking in Frameworks */,
 				42A0915F2EDE130900AB4F79 /* Core in Frameworks */,
 				426751BB2EDE447F0056D85B /* Networking in Frameworks */,
+				426752232EDE51A60056D85B /* Storage in Frameworks */,
 				426751A82EDE3ADF0056D85B /* DesignSystem in Frameworks */,
+				426752252EDE56570056D85B /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +131,8 @@
 				426751A72EDE3ADF0056D85B /* DesignSystem */,
 				426751B72EDE444D0056D85B /* Networking */,
 				426751BA2EDE447F0056D85B /* Networking */,
+				426752222EDE51A60056D85B /* Storage */,
+				426752242EDE56570056D85B /* Core */,
 			);
 			productName = Countries;
 			productReference = 429E4AC42EDE0B39005DDFA2 /* Countries.app */;
@@ -214,6 +220,7 @@
 				42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */,
 				426751A62EDE3ADF0056D85B /* XCLocalSwiftPackageReference "Packages/DesignSystem" */,
 				426751B92EDE447F0056D85B /* XCLocalSwiftPackageReference "Packages/Networking" */,
+				426752212EDE51A60056D85B /* XCLocalSwiftPackageReference "Packages/Storage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 429E4AC52EDE0B39005DDFA2 /* Products */;
@@ -608,6 +615,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Networking;
 		};
+		426752212EDE51A60056D85B /* XCLocalSwiftPackageReference "Packages/Storage" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Storage;
+		};
 		42A0915D2EDE130900AB4F79 /* XCLocalSwiftPackageReference "Packages/Core" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/Core;
@@ -626,6 +637,14 @@
 		426751BA2EDE447F0056D85B /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
+		};
+		426752222EDE51A60056D85B /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Storage;
+		};
+		426752242EDE56570056D85B /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
 		};
 		42A0915E2EDE130900AB4F79 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
